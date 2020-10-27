@@ -1,0 +1,20 @@
+{
+    "Author": "Jorg Klein",
+    "ContentSize": 9525,
+    "ContentUrl": "https://raw.githubusercontent.com/azureautomation/azure-sql-database-scale-using-scheduled-autoscaling/master/AzureSQLDatabaseScheduledAutoScaling.ps1",
+    "DownloadCount": 10402,
+    "Id": "Azure-SQL-Database-fa6f3115",
+    "IsFederated": false,
+    "IsWorkflow": false,
+    "Popularity": 9,
+    "RaterCount": 6,
+    "Rating": 5.0,
+    "ReleaseDate": "2017-9-14T00:00:00",
+    "RunbookKind": 5,
+    "RunbookKindString": "PowerShell",
+    "Summary": "Vertically scale an Azure SQL Database up or down according to a schedule using Azure Automation.",
+    "Title": "Azure SQL Database - Scale using scheduled autoscaling",
+    "UpdatedDate": "2018-11-29T00:00:00",
+    "Url": "https://github.com/azureautomation/azure-sql-database-scale-using-scheduled-autoscaling",
+    "UserTags": "Powershell, Windows Azure SQL Database, Azure Automation"
+}
