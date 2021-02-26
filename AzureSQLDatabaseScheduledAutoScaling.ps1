@@ -38,10 +38,12 @@
 .PARAMETER scalingSchedule
     Database Scaling Schedule. It is possible to enter multiple
     comma separated schedules: [{},{}]
+    Keys: WeekDays, StartTime, StopTime, Edition and Tier
     Weekdays start at 0 (sunday) and end at 6 (saturday).
     If the script is executed outside the scaling schedule time slots
     that you defined, the defaut edition/tier (see below) will be
     configured.
+    Example: [{WeekDays:[1], StartTime:"06:59:59″, StopTime:"17:59:59″, Edition: “Premium", Tier: “P2″}, {WeekDays:[2,3,4,5], StartTime:"06:59:59″, StopTime:"17:59:59", Edition: “Premium", Tier: “P1"}]
 
 .PARAMETER scalingScheduleTimeZone
     Time Zone of time slots in $scalingSchedule.
@@ -63,7 +65,7 @@
     -azureRunAsConnectionName AzureRunAsConnection
     -serverName myserver
     -databaseName myDatabase
-    -scalingSchedule [{WeekDays:[1], StartTime:”06:59:59″, StopTime:”17:59:59″, Edition: “Premium”, Tier: “P2″}, {WeekDays:[2,3,4,5], StartTime:”06:59:59″, StopTime:”17:59:59”, Edition: “Premium”, Tier: “P1”}]
+    -scalingSchedule [{ Edition: 'Standard', Tier: 'S1'}]
     -scalingScheduleTimeZone W. Europe Standard Time
     -defaultEdition Standard
     -defaultTier S0
@@ -135,8 +137,8 @@ Write-Output "Current day of week: $currentDayOfWeek." | timestamp
 # Get the scaling schedule for the current day of week
 $dayObjects = $stateConfig | Where-Object {$_.WeekDays -contains $currentDayOfWeek } `
 |Select-Object Edition, Tier, `
-@{Name="StartTime"; Expression = {[datetime]::ParseExact(($startTime.ToString("yyyy:MM:dd")+”:”+$_.StartTime),"yyyy:MM:dd:HH:mm:ss", [System.Globalization.CultureInfo]::InvariantCulture)}}, `
-@{Name="StopTime"; Expression = {[datetime]::ParseExact(($startTime.ToString("yyyy:MM:dd")+”:”+$_.StopTime),"yyyy:MM:dd:HH:mm:ss", [System.Globalization.CultureInfo]::InvariantCulture)}}
+@{Name="StartTime"; Expression = {[datetime]::ParseExact(($startTime.ToString("yyyy:MM:dd")+":"+$_.StartTime),"yyyy:MM:dd:HH:mm:ss", [System.Globalization.CultureInfo]::InvariantCulture)}}, `
+@{Name="StopTime"; Expression = {[datetime]::ParseExact(($startTime.ToString("yyyy:MM:dd")+":"+$_.StopTime),"yyyy:MM:dd:HH:mm:ss", [System.Globalization.CultureInfo]::InvariantCulture)}}
 
 # Get the database object
 $sqlDB = Get-AzureRmSqlDatabase `
